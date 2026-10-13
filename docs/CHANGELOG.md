@@ -5,6 +5,13 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [No publicado]
 
+### Agregado
+
+- El espejo WMS convierte `minResolution` y `maxResolution` de cada capa en rango de zoom, combinado con
+  `minZoom` y `maxZoom`.
+- Demo: el mapa de la cortina sigue el terreno y la exageración del puente; los deslizadores tienen
+  nombre accesible.
+
 ## [0.1.0] - 2026-10-13
 
 ### Agregado

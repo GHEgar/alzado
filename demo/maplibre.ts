@@ -34,7 +34,6 @@ export async function createMap(container: HTMLElement, gray = false): Promise<M
                 relief: { type: 'raster-dem', ...TERRAIN_TILES, tileSize: 256 },
                 ...(gray ? { dem: { type: 'raster-dem' as const, ...TERRAIN_TILES, tileSize: 256 } } : {}),
             },
-            ...(gray ? { terrain: { source: 'dem', exaggeration: 1.5 } } : {}),
             layers: [
                 { id: 'background', type: 'background', paint: { 'background-color': '#f4f1ea' } },
                 { id: 'osm', type: 'raster', source: 'osm', paint: { 'raster-saturation': gray ? -1 : 0 } },

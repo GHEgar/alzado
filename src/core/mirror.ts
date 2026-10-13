@@ -61,6 +61,19 @@ export function mirrorWmsLayers(options: MirrorOptions): WmsMirror {
     let scheduled = false;
     let groupKey: EventsKey | null = null;
 
+    const zoomRange = (state: State): [number, number] => {
+        const view = olMap.getView();
+        const zoomFor = (resolution: number): number | undefined => (
+            Number.isFinite(resolution) && resolution > 0 ? view.getZoomForResolution(resolution) : undefined
+        );
+        const fromResolution = zoomFor(state.maxResolution);
+        const toResolution = zoomFor(state.minResolution);
+        return [
+            Math.max(state.minZoom, fromResolution ?? -Infinity),
+            Math.min(state.maxZoom, toResolution ?? Infinity),
+        ];
+    };
+
     const describe = (state: State): [string, Mirrored] | null => {
         const endpoint = wmsEndpoint(state.layer);
         if (!endpoint) return null;
@@ -69,10 +82,11 @@ export function mirrorWmsLayers(options: MirrorOptions): WmsMirror {
             ...(options.tileSize === undefined ? {} : { tileSize: options.tileSize }),
             ...(options.baseUrl === undefined ? {} : { baseUrl: options.baseUrl }),
         };
+        const [minZoom, maxZoom] = zoomRange(state);
         return [`${prefix}${getUid(state.layer)}`, {
             url: wmsTileUrl(endpoint.url, params, tileOptions),
-            minzoom: clampZoom(state.minZoom - offset),
-            maxzoom: clampZoom(state.maxZoom - offset),
+            minzoom: clampZoom(minZoom - offset),
+            maxzoom: clampZoom(maxZoom - offset),
             opacity: state.opacity,
         }];
     };

@@ -114,3 +114,13 @@ test('la cortina comparte la cámara entre los dos mapas 3D', async ({ page }) =
     const ol = await olState(page);
     expect(ol.zoom).toBeCloseTo(10, 6);
 });
+
+test('la cortina sigue la exageración del terreno', async ({ page }) => {
+    await enter(page);
+    await page.getByLabel('Cortina').check();
+    await page.waitForFunction(() => window.demo?.second?.getTerrain()?.source === 'dem');
+    await page.getByRole('slider', { name: 'Exageración' }).fill('3');
+    await expect.poll(() => page.evaluate(() => window.demo?.second?.getTerrain()?.exaggeration)).toBe(3);
+    await page.getByLabel('Terreno').uncheck();
+    await expect.poll(() => page.evaluate(() => window.demo?.second?.getTerrain() ?? null)).toBeNull();
+});

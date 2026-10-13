@@ -31,7 +31,7 @@ export function Controls({ state, overlay, swipe, onSwipe }: ControlsProps) {
             </button>
             <label>
                 Pitch <output data-testid="pitch">{Math.round(state.pitch)}°</output>
-                <input type="range" min={0} max={85} value={state.pitch} onChange={(event) => state.setPitch(Number(event.target.value))} />
+                <input type="range" aria-label="Pitch" min={0} max={85} value={state.pitch} onChange={(event) => state.setPitch(Number(event.target.value))} />
             </label>
             <label className="check">
                 <input type="checkbox" checked={terrain.enabled} onChange={(event) => state.setTerrain({ enabled: event.target.checked })} />
@@ -41,6 +41,7 @@ export function Controls({ state, overlay, swipe, onSwipe }: ControlsProps) {
                 Exageración <output>{terrain.exaggeration.toFixed(1)}×</output>
                 <input
                     type="range"
+                    aria-label="Exageración"
                     min={1}
                     max={4}
                     step={0.1}
@@ -54,7 +55,7 @@ export function Controls({ state, overlay, swipe, onSwipe }: ControlsProps) {
             </label>
             <label>
                 Opacidad
-                <input type="range" min={0} max={1} step={0.05} value={wms.opacity} onChange={(event) => overlay.setOpacity(Number(event.target.value))} />
+                <input type="range" aria-label="Opacidad" min={0} max={1} step={0.05} value={wms.opacity} onChange={(event) => overlay.setOpacity(Number(event.target.value))} />
             </label>
             <label className="check">
                 <input type="checkbox" checked={swipe} disabled={!state.active} onChange={(event) => onSwipe(event.target.checked)} />

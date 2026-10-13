@@ -60,6 +60,19 @@ describe('mirrorWmsLayers', () => {
         expect(mirror.ids()).toEqual([]);
     });
 
+    it('convierte minResolution y maxResolution en rango de zoom', () => {
+        const layer = wms('a');
+        const { olMap, map } = setup([layer]);
+        const view = olMap.getView();
+        layer.setMaxResolution(view.getResolutionForZoom(6));
+        layer.setMinResolution(view.getResolutionForZoom(14));
+        layer.setMaxZoom(12);
+        mirrorWmsLayers({ olMap, map });
+        const mirrored = map.layers.find((item) => item.id.startsWith('alzado-wms-'));
+        expect(mirrored?.minzoom).toBeCloseTo(5, 9);
+        expect(mirrored?.maxzoom).toBeCloseTo(11, 9);
+    });
+
     it('lee capas dentro de grupos con la opacidad efectiva', () => {
         const inner = wms('inner', { opacity: 0.5 });
         const { olMap, map } = setup([new LayerGroup({ layers: [inner], opacity: 0.5 })]);

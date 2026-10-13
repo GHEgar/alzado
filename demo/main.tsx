@@ -74,6 +74,18 @@ function App() {
     useCameraGroup(second, group);
 
     useEffect(() => {
+        if (!second) return undefined;
+        const apply = (): void => {
+            second.setTerrain(state.terrain?.enabled ? { source: 'dem', exaggeration: state.terrain.exaggeration } : null);
+        };
+        if (second.getStyle() !== undefined) apply();
+        second.on('style.load', apply);
+        return () => {
+            second.off('style.load', apply);
+        };
+    }, [second, state.terrain]);
+
+    useEffect(() => {
         if (state.active) map?.resize();
         else olMap.updateSize();
     }, [state.active, map, olMap]);
