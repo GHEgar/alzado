@@ -8,6 +8,8 @@ Headless camera bridge between 2D OpenLayers and 3D MapLibre: pitch, bearing, te
 
 ![An OpenLayers map switching to MapLibre in 3D, rotating, tilting, raising the terrain, toggling the mirrored WMS layer and coming back to 2D with the new rotation](.github/assets/demo.gif)
 
+**[Live demo](https://ghegar.github.io/alzado/)**
+
 alzado owns the camera between the two maps. The OpenLayers view keeps center, zoom and rotation;
 alzado adds what OpenLayers lacks — pitch and terrain — and carries the camera both ways, so turning
 the map in 3D comes back as rotation in 2D. It also mirrors your OpenLayers WMS layers into MapLibre as
