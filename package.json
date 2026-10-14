@@ -1,7 +1,7 @@
 {
     "name": "alzado",
     "version": "0.1.0",
-    "description": "Headless camera bridge between a 2D OpenLayers view and a 3D MapLibre map: pitch, bearing and terrain both ways, plus a WMS layer mirror.",
+    "description": "Headless camera bridge between 2D OpenLayers and 3D MapLibre: pitch, bearing, terrain and a WMS mirror.",
     "license": "AGPL-3.0-only",
     "author": "Edgar Villarreal",
     "type": "module",
