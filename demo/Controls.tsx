@@ -27,7 +27,7 @@ export function Controls({ state, overlay, swipe, onSwipe }: ControlsProps) {
     return (
         <header className="toolbar">
             <button type="button" className="primary" data-testid="toggle" onClick={state.toggle}>
-                {state.active ? 'Ver en 2D' : 'Ver en 3D'}
+                {state.active ? 'View in 2D' : 'View in 3D'}
             </button>
             <label>
                 Pitch <output data-testid="pitch">{Math.round(state.pitch)}°</output>
@@ -35,13 +35,13 @@ export function Controls({ state, overlay, swipe, onSwipe }: ControlsProps) {
             </label>
             <label className="check">
                 <input type="checkbox" checked={terrain.enabled} onChange={(event) => state.setTerrain({ enabled: event.target.checked })} />
-                Terreno
+                Terrain
             </label>
             <label>
-                Exageración <output>{terrain.exaggeration.toFixed(1)}×</output>
+                Exaggeration <output>{terrain.exaggeration.toFixed(1)}×</output>
                 <input
                     type="range"
-                    aria-label="Exageración"
+                    aria-label="Exaggeration"
                     min={1}
                     max={4}
                     step={0.1}
@@ -54,12 +54,12 @@ export function Controls({ state, overlay, swipe, onSwipe }: ControlsProps) {
                 WMS
             </label>
             <label>
-                Opacidad
-                <input type="range" aria-label="Opacidad" min={0} max={1} step={0.05} value={wms.opacity} onChange={(event) => overlay.setOpacity(Number(event.target.value))} />
+                Opacity
+                <input type="range" aria-label="Opacity" min={0} max={1} step={0.05} value={wms.opacity} onChange={(event) => overlay.setOpacity(Number(event.target.value))} />
             </label>
             <label className="check">
                 <input type="checkbox" checked={swipe} disabled={!state.active} onChange={(event) => onSwipe(event.target.checked)} />
-                Cortina
+                Swipe
             </label>
         </header>
     );

@@ -12,6 +12,10 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Demo: el mapa de la cortina sigue el terreno y la exageración del puente; los deslizadores tienen
   nombre accesible.
 
+### Cambiado
+
+- El demo está en inglés.
+
 ## [0.1.0] - 2026-10-13
 
 ### Agregado

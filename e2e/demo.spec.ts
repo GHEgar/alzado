@@ -12,12 +12,12 @@ async function ready(page: Page): Promise<void> {
 
 async function enter(page: Page): Promise<void> {
     await page.getByTestId('toggle').click();
-    await expect(page.getByTestId('toggle')).toHaveText('Ver en 2D');
+    await expect(page.getByTestId('toggle')).toHaveText('View in 2D');
 }
 
 async function exit(page: Page): Promise<void> {
     await page.getByTestId('toggle').click();
-    await expect(page.getByTestId('toggle')).toHaveText('Ver en 3D');
+    await expect(page.getByTestId('toggle')).toHaveText('View in 3D');
 }
 
 const olState = (page: Page) => page.evaluate(() => {
@@ -104,7 +104,7 @@ test('el espejo WMS sigue la visibilidad de la capa', async ({ page }) => {
 
 test('la cortina comparte la cámara entre los dos mapas 3D', async ({ page }) => {
     await enter(page);
-    await page.getByLabel('Cortina').check();
+    await page.getByLabel('Swipe').check();
     await page.waitForFunction(() => !!window.demo?.second);
     await page.evaluate(() => window.demo?.second?.jumpTo({ zoom: 9, bearing: -45, pitch: 30 }));
     const ml = await mlState(page);
@@ -117,10 +117,10 @@ test('la cortina comparte la cámara entre los dos mapas 3D', async ({ page }) =
 
 test('la cortina sigue la exageración del terreno', async ({ page }) => {
     await enter(page);
-    await page.getByLabel('Cortina').check();
+    await page.getByLabel('Swipe').check();
     await page.waitForFunction(() => window.demo?.second?.getTerrain()?.source === 'dem');
-    await page.getByRole('slider', { name: 'Exageración' }).fill('3');
+    await page.getByRole('slider', { name: 'Exaggeration' }).fill('3');
     await expect.poll(() => page.evaluate(() => window.demo?.second?.getTerrain()?.exaggeration)).toBe(3);
-    await page.getByLabel('Terreno').uncheck();
+    await page.getByLabel('Terrain').uncheck();
     await expect.poll(() => page.evaluate(() => window.demo?.second?.getTerrain() ?? null)).toBeNull();
 });
