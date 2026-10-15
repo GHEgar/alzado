@@ -3,7 +3,7 @@
     --paper: #f7f5f0;
     --line: #d9d3c7;
     --accent: #b4532a;
-    font-family: system-ui, sans-serif;
+    font-family: 'Rotulo', system-ui, sans-serif;
     color: var(--ink);
 }
 

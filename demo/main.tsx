@@ -1,4 +1,5 @@
 import 'ol/ol.css';
+import '@npmegar/rotulo';
 import type { Map as MapLibreMap } from 'maplibre-gl';
 import { StrictMode, useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
